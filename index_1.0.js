@@ -6,6 +6,12 @@ var authConfig = {
     "root": ""// 根目录ID，root为默认根目录，团队盘https://drive.google.com/drive/folders/{这后面一堆代码就是id}
 };
 
+/** http basic auth **/
+// https://tool.oschina.net/encrypt?type=3
+// gd:1024
+const authorization = "Basic Z2Q6MTAyNA==";  //设置用户名和密码，base64编码
+/** http basic auth **/
+
 
 var gd;
 
