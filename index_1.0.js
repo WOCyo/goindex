@@ -8,13 +8,28 @@ var authConfig = {
 
 /** http basic auth **/
 // https://tool.oschina.net/encrypt?type=3
-// gd:1024
-const authorization = "Basic Z2Q6MTAyNA==";  //设置用户名和密码，base64编码
+// gd:1024  账户密码
+const authorization = "";  //设置用户名和密码，base64编码
 /** http basic auth **/
-
 
 var gd;
 
+addEventListener('fetch', event => {
+  console.log(event.request.headers.get("Authorization"));
+  if (event.request.headers.get("Authorization") !== authorization) {
+    return event.respondWith(new Response(
+      null, {
+        status: 401,
+        statusText: "'Authentication required.'",
+        body: "Unauthorized",
+        headers: {
+          "WWW-Authenticate": 'Basic realm="User Visible Realm"'
+        }
+      }
+    ))
+  }
+  event.respondWith(handleRequest(event.request))
+})
 
 /**
  * Fetch and log a request
@@ -371,6 +386,29 @@ class view{
 			}
 		}
 	</style>
+	<script src="https://cdn.staticfile.org/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/layer/2.3/layer.js"></script>
+    <script>
+
+  $(function () {
+    $('.mdui-list').on('click','li',function(){
+      var href = $(this).children('a').attr('href');
+      console.log(href);
+      if(href.lastIndexOf(".mp4") > -1) {
+              layer.open({
+                type: 1,
+                title: decodeURI(href.substring(href.lastIndexOf("/") + 1, href.length)),
+                shadeClose: true,
+                shade: 0.8,
+                area: ['100%', '100%'],
+                content: '<center><video controls autoplay=true preload=auto style="width:80%;object-fit: cover;" src="' + href + '"></video></center>'
+              });
+              return false;
+            }
+    });
+     
+  });
+    </script>
 </head>
 <body class="mdui-theme-primary-blue-grey mdui-theme-accent-blue">
 	<header class="mdui-appbar mdui-color-theme">
