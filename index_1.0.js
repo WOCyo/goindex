@@ -9,7 +9,7 @@ var authConfig = {
 /** http basic auth **/
 // https://tool.oschina.net/encrypt?type=3
 // gd:1024  账户密码
-const authorization = "";  //设置用户名和密码，base64编码
+const authorization = "Basic Z2Q6MTAyNA==";  //设置用户名和密码，base64编码，注意保留前面的Basic 
 /** http basic auth **/
 
 var gd;
